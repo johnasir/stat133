@@ -2,6 +2,7 @@
 # Graphics Skills
 # Due Thursday February 12th by midnight 
 # This .R file should contain your code and answers to questions
+hello
 
 # The goals of this assignment are to: 
 # 1. Become familiar with the variety of plotting functions available in R,
