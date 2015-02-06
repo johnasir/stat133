@@ -59,18 +59,18 @@
 
 # Q1a. How many world records does this data frame contain?
 
-# n.wr <- your code here
+n.wr <- nrow(wr1500m)
 
 # Q1b. Use R commands to find out who currently holds the world
 # record in the men's 1500 meter.
  
 # wr.name <- your code here
-
+wr.name <- wr1500m$athlete[n.wr]
 
 # Let's look at the relationship between date and time.
 # Q1c. What type of variable (numeric (continuous or discrete), nominal ordinal)
 # are year and times? (no need to save the output, just look at it)
-
+# they are discrete and ordinal
 
 # When we are examining a variable to see how it changes in time,
 # we typically make a line plot, with time on the x-axes and 
@@ -82,11 +82,9 @@
 # But do add 180 to the times so that they are accurate measurements in seconds,
 # store that in a new variable and add to the data frame.
 
-# times_sec <- your code here
-# wr1500m <- your code here
-# plot( your code here )
-
-
+times_sec <- wr1500m$times + 180
+wr1500m <- data.frame(wr1500m, times_sec)
+plot(wr1500m$year, wr1500m$times_sec, type = "s")
 
 # Q2b. Redo the plot using a date that incorporates the month as 
 # well as the year. For example, in Sep 1904 the world record 
@@ -96,10 +94,10 @@
 # first find and set all missing months to 0.5
 # Add new_year to the dataframe.
 
-# your code here
-# new_year <- your code here
-# wr1500m <- your code here
-# plot( your code here )
+wr1500m$month[is.na(wr1500m$month)] <- 6
+new_year <- wr1500m$year + (wr1500m$year / 12)
+wr1500m <- data.frame(wr1500m, new_year)
+plot(wr1500m$new_year, wr1500m$times_sec, type = "s")
 
 
 # Q3. The current world record was set in 1998. If we want to
