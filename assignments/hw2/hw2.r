@@ -206,7 +206,7 @@ plot(SO2012Ctry$GDP, SO2012Ctry$pop)
 
 GDP_per_person <- SO2012Ctry$GDP/SO2012Ctry$pop
 SO2012Ctry <- data.frame(SO2012Ctry, GDP_per_person)
-symbols(x = log(SO2012Ctry$pop), y = log(SO2012Ctry$GDP_per_person), circles = ((SO2012Ctry$Total ^ .5) / pi))
+symbols(x = log(SO2012Ctry$pop), y = log(SO2012Ctry$GDP_per_person), circles = ((SO2012Ctry$Total * 40) / pi))
 
 
 # Q8. It appears that the countries with no medals are circles too.
@@ -216,16 +216,21 @@ symbols(x = log(SO2012Ctry$pop), y = log(SO2012Ctry$GDP_per_person), circles = (
 # plotting character.
 
 # your plotting code here
-symbols(x = log(SO2012Ctry$pop), y = log(SO2012Ctry$GDP_per_person), circles = ((SO2012Ctry$Total ^ .5) / pi))
+nonzero <- SO2012Ctry[SO2012Ctry$Total  != 0, ]
+
+
+symbols(x = log(nonzero$pop), y = log(nonzero$GDP_per_person), circles = ((nonzero$Total * 40) / pi))
 
 # Q9. Make the plot information rich by adding axis labels, 
 # title, and label 5 of the more interesting points
 # with the country name. Use text() to do this.
 
-top5 <- order()
+#top5 <- order()
 # your plotting code here, including a new call to text() 
 
-symbols(x = log(SO2012Ctry$pop), y = log(SO2012Ctry$GDP_per_person), circles = ((SO2012Ctry$Total ^ .5) / pi), xlab = "population", ylab = "GDP per person", main = "Total Medals Won by GDP")
+symbols(x = log(nonzero$pop), y = log(nonzero$GDP_per_person), circles = nonzero$Total ^ .5 / 40, xlab = "population", ylab = "GDP per person", main = "Total Medals Won by GDP", inches = FALSE)
+zero <- SO2012Ctry[SO2012Ctry$Total  == 0, ]
+symbols(add = TRUE, x = log(zero$pop), y = log(zero$GDP_per_person), circles = zero$Total ^ .5 / 40, xlab = "population", ylab = "GDP per person", main = "Total Medals Won by GDP", inches = FALSE, pch = ".")
 
 ######################################
 # PLOT 3.
@@ -237,9 +242,9 @@ symbols(x = log(SO2012Ctry$pop), y = log(SO2012Ctry$GDP_per_person), circles = (
 
 ## you only need to run these two lines once:
 #install.packages("maps")
-#library("maps")
+library("maps")
 
-# world <- map( your code here )
+world <- map(fill = TRUE, col = 'light gray')
 
 #Q11. Use the symbols() function to add circles to the map where
 # the circles are proportional in area to the number of medals
@@ -252,9 +257,9 @@ symbols(x = log(SO2012Ctry$pop), y = log(SO2012Ctry$GDP_per_person), circles = (
 # pull out the contries that won at least one medal (you will need at least
 # the contries longitude, latitude and Total.)
 
-# wonMedal <- your code here
-# world <- your code here
-# symbols( your code here )
+wonMedal <- SO2012Ctry[SO2012Ctry$Total  != 0, ]
+world <- map(fill = TRUE, col = 'light gray')
+symbols (add = TRUE, x = wonMedal$longitude, y = wonMedal$latitude, circles = wonMedal$Total ^ .5, inches = FALSE)
 
 
 #Q12. Remake the plot and fill in the circles with a partially
@@ -269,16 +274,16 @@ symbols(x = log(SO2012Ctry$pop), y = log(SO2012Ctry$GDP_per_person), circles = (
 # e.g. myColor = "#FEB24CAA" or   "#FEB24C88"
 
 # You only need to call these two lines once:
-#install.packages("RColorBrewer")
-#library("RColorBrewer")
+install.packages("RColorBrewer")
+library("RColorBrewer")
 
-# display.brewer.all( your code here )
-# brewer.pal( your code here )
+#display.brewer.all()
+#brewer.pal(#FEB24C)
 
-# myGold <- your selected color
+myGold <- "#FEB24CAA"
 
-#world <- your code here)
-#symbols( your code here )
+world <- map(fill = TRUE, col = 'light gray')
+symbols (add = TRUE, x = wonMedal$longitude, y = wonMedal$latitude, circles = wonMedal$Total ^ .5, inches = FALSE, bg = myGold)
 
 
 ## That was the FINAL version of this plot
