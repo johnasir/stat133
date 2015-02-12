@@ -95,7 +95,7 @@ plot(wr1500m$year, wr1500m$times_sec, type = "s")
 # Add new_year to the dataframe.
 
 wr1500m$month[is.na(wr1500m$month)] <- 6
-new_year <- wr1500m$year + (wr1500m$year / 12)
+new_year <- wr1500m$year + ((wr1500m$year %% 12) / 12)
 wr1500m <- data.frame(wr1500m, new_year)
 plot(wr1500m$new_year, wr1500m$times_sec, type = "s")
 
@@ -108,9 +108,9 @@ plot(wr1500m$new_year, wr1500m$times_sec, type = "s")
 # so that 2014 is included in the x-axis scale;
 # then use the lines() function to add the additional segment.
 
-# wr_1998 <- your code here
-# plot( your code here )
-# lines( your code here )
+wr_1998 <- wr1500m$times_sec[n.wr]
+plot(wr1500m$new_year, wr1500m$times_sec, type = "s", xlim = c(1890,2014))
+lines(c(1998.5, 2014), c(wr_1998, wr_1998))
 
 
 # Q4. There are two times where the record stood for several
@@ -125,11 +125,11 @@ plot(wr1500m$new_year, wr1500m$times_sec, type = "s")
 # Also, do not type in the athlete's name. Instead, use subsetting
 # of wr1500m$athlete to access it.
 
-# wr_1944 <- your code here
-# abline( your code here )
-# abline( your code here )
-# text( your code here )
-# text( your code here )
+wr_1944 <- wr1500m$times_sec[26]#wr1500m$athlete[26]
+abline(v = wr1500m$new_year[n.wr])
+abline(v = wr1500m$new_year[26])
+text(x = 1944, y = wr1500m$times_sec[26], labels = wr1500m$athlete[26], adj = c(0,-1), col  = "red", cex = .5)
+text(x = 1998, y = wr1500m$times_sec[n.wr], labels = wr1500m$athlete[n.wr], adj = c(.25,-3), col  = "red", cex = .5)
 
 
 # Q5. Now we are ready to add other contextual information.
@@ -137,6 +137,22 @@ plot(wr1500m$new_year, wr1500m$times_sec, type = "s")
 # This is the FINAL version of the plot of world record times.
 
 # put your final version of the plotting commands below.
+n.wr <- nrow(wr1500m)
+wr.name <- wr1500m$athlete[n.wr]
+wr_1944 <- wr1500m$times_sec[26]
+wr_1998 <- wr1500m$times_sec[n.wr]
+wr1500m$month[is.na(wr1500m$month)] <- 6
+new_year <- wr1500m$year + ((wr1500m$year %% 12) / 12)
+wr1500m <- data.frame(wr1500m, new_year)
+times_sec <- wr1500m$times + 180
+wr1500m <- data.frame(wr1500m, times_sec)
+plot(wr1500m$new_year, wr1500m$times_sec, type = "s", xlim = c(1890,2014),  xlab = "Year", ylab = "time(s)", main = "1500 meter World Records")
+lines(c(1998.5, 2014), c(wr_1998, wr_1998))
+abline(v = wr1500m$new_year[n.wr])
+abline(v = wr1500m$new_year[26])
+text(x = 1944, y = wr1500m$times_sec[26], labels = wr1500m$athlete[26], adj = c(0,-1), col  = "red", cex = .5)
+text(x = 1998, y = wr1500m$times_sec[n.wr], labels = wr1500m$athlete[n.wr], adj = c(.25,-3), col  = "red", cex = .5)
+
 
 ## You have finised the first plot!!
 
@@ -152,7 +168,7 @@ plot(wr1500m$new_year, wr1500m$times_sec, type = "s")
 # The data frame SO2012Ctry contains this information.
 # It can be loaded into R with
 
-# load( your code here )
+#load(SO2012Ctry.rda)
 
 
 #Q6 Take a look at the variables in this data frame.
@@ -174,7 +190,7 @@ plot(wr1500m$new_year, wr1500m$times_sec, type = "s")
 # Consider which of the three principles of good graphics this
 # plot violates and why.
 
-# plot( your code here )
+plot(SO2012Ctry$GDP, SO2012Ctry$pop)
 
 
 ### Data stand out, Values are plotted on the top of each other  
@@ -188,9 +204,9 @@ plot(wr1500m$new_year, wr1500m$times_sec, type = "s")
 # symbols() where the area of the circle is proportional to the 
 # total number of medals.
 
-# GDP_per_person <- your code here
-# SO2012Ctry <- your code here
-# symbols( your code here )
+GDP_per_person <- SO2012Ctry$GDP/SO2012Ctry$pop
+SO2012Ctry <- data.frame(SO2012Ctry, GDP_per_person)
+symbols(x = log(SO2012Ctry$pop), y = log(SO2012Ctry$GDP_per_person), circles = ((SO2012Ctry$Total ^ .5) / pi))
 
 
 # Q8. It appears that the countries with no medals are circles too.
@@ -200,14 +216,16 @@ plot(wr1500m$new_year, wr1500m$times_sec, type = "s")
 # plotting character.
 
 # your plotting code here
+symbols(x = log(SO2012Ctry$pop), y = log(SO2012Ctry$GDP_per_person), circles = ((SO2012Ctry$Total ^ .5) / pi))
 
 # Q9. Make the plot information rich by adding axis labels, 
 # title, and label 5 of the more interesting points
 # with the country name. Use text() to do this.
 
-# top5 <- order( your code here )
+top5 <- order()
 # your plotting code here, including a new call to text() 
 
+symbols(x = log(SO2012Ctry$pop), y = log(SO2012Ctry$GDP_per_person), circles = ((SO2012Ctry$Total ^ .5) / pi), xlab = "population", ylab = "GDP per person", main = "Total Medals Won by GDP")
 
 ######################################
 # PLOT 3.
@@ -218,8 +236,8 @@ plot(wr1500m$new_year, wr1500m$times_sec, type = "s")
 # where the countries are filled with a light grey color.
 
 ## you only need to run these two lines once:
-install.packages("maps")
-library("maps")
+#install.packages("maps")
+#library("maps")
 
 # world <- map( your code here )
 
@@ -243,7 +261,7 @@ library("maps")
 # transparent gold color. To create this color: 
 # install the RColorBrewer library and load it into R;
 # call display.brewer.all() to examine the palettes;
-# choose a palette and ask for the names of a few colors 
+# choose a palette and ask for the names of a few colors
 # using brewer.pal();
 # pick one of the colors and create a new one that is transparent
 # by adding two more digits to the end of the name, e.g.,
@@ -251,15 +269,15 @@ library("maps")
 # e.g. myColor = "#FEB24CAA" or   "#FEB24C88"
 
 # You only need to call these two lines once:
-install.packages("RColorBrewer")
-library("RColorBrewer")
+#install.packages("RColorBrewer")
+#library("RColorBrewer")
 
 # display.brewer.all( your code here )
 # brewer.pal( your code here )
 
 # myGold <- your selected color
 
-#world <- your code here
+#world <- your code here)
 #symbols( your code here )
 
 
