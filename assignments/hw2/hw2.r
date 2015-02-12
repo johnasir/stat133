@@ -298,7 +298,7 @@ symbols (add = TRUE, x = wonMedal$longitude, y = wonMedal$latitude, circles = wo
 # and contains information about every athlete who competed 
 # in the Olympics.
 
-# load( )
+# load(London2012ALL_ATHLETES.rda)
 
 # There is one observation for each athlete. 
 # (Actually, about 20 athletes have two records if they
@@ -317,15 +317,16 @@ names(athletes)
 # some of the questions below. 
 
 # How many athletes competed in the 2012 Olympics?
-# n.athletes <- your code here
+n.athletes <- nrow(athletes)
+n.women <- sum(athletes$Sex == "F")
 
-# How many women competed?
+# How many women competed? 4835
 
 # What proportion of the participants were women?
-# frac.women <- your code here
+frac.women <- n.women / n.athletes
 
 # How many sports were there?
-# n.sports <- your code here
+n.sports <- length(table(athletes$Sport))
 
 
 #Q14. Make a barplot of Sport and Sex that emphasizes the 
@@ -335,13 +336,15 @@ names(athletes)
 # and again with beside = FALSE. Determine which of these 
 # barplots provides the easiest comparison. 
 
-# athTab <- your code here
+athTab <- table(athletes$Sex, athletes$Sport)
 # make two barplots
+barplot(athTab, beside = TRUE)
+barplot(athTab, beside = FALSE)
 
 
 # what should beside be set to, T/F?
-# set.beside <- your answer
-
+set.beside <- TRUE
+barplot(athTab, beside = TRUE)
 ### Barplot with beside = TRUE provides the easiest comparison. 
 
 #Q15. Remake the barplot above, but this time switch the order 
@@ -349,15 +352,17 @@ names(athletes)
 # the beside parameter that you decided was best for the 
 # plot in Q 14. 
 
-# athTab2 <- table()
+athTab2 <- table(athletes$Sport, athletes$Sex)
 # make barplot
+barplot(athTab2, beside = TRUE)
+
 
 
 # Compare the barplot with (Sex, Sport) vs (Sport, Sex). 
 # Which makes a more interesting visual comparison, plot 1 or 2?
 # store your answer (1 or 2) in best.plot.
 
-# best.plot <- your answer
+best.plot <- 1
 
 
 # Q16. Notice that the bars are in alphabetical order by sport.
@@ -370,8 +375,11 @@ names(athletes)
 # the rows/cols. The resulting barplot should show bars in 
 # increasing height.
 
-# orderSport <- your code here
-# barplot( your code here )
+orderSport <- order(table(athletes$Sport))
+sport = table(athletes$Sex, athletes$Sport)
+hi = sport[, orderSport]
+barplot(hi, beside = T)
+
 
 
 # Q17. Finally to make the plot more informaation rich, try turning
