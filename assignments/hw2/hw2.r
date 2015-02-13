@@ -51,6 +51,7 @@
 # the hw3 directory in the file WR1500MeterMen.rda.
 
 # load the data
+load(wr1500m.rda)
 
 # The name of the object loaded is wr1500m
 # The time (in the column "times") in these data are recorded in seconds, 
@@ -168,7 +169,7 @@ text(x = 1998, y = wr1500m$times_sec[n.wr], labels = wr1500m$athlete[n.wr], adj 
 # The data frame SO2012Ctry contains this information.
 # It can be loaded into R with
 
-#load(SO2012Ctry.rda)
+load(SO2012Ctry.rda)
 
 
 #Q6 Take a look at the variables in this data frame.
@@ -298,7 +299,7 @@ symbols (add = TRUE, x = wonMedal$longitude, y = wonMedal$latitude, circles = wo
 # and contains information about every athlete who competed 
 # in the Olympics.
 
-# load(London2012ALL_ATHLETES.rda)
+load(London2012ALL_ATHLETES.rda)
 
 # There is one observation for each athlete. 
 # (Actually, about 20 athletes have two records if they
@@ -397,3 +398,4 @@ barplot(hi, beside = T, cex.names = .7, las = 2)
 
 # You are DONE.
 # Hope you had fun making increasingly complex and attractive plots with R.
+
