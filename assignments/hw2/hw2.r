@@ -388,7 +388,9 @@ barplot(hi, beside = T)
 # you found the parameter in the par() function, this
 # parameter can be added in the call to barplot().
 # Also find and use a parameter to shrink the text for these labels. 
-# Lastly, add a title to the plot.
+# Lastly, add a title to the plot.'
+barplot(hi, beside = T, cex.names = .7, las = 2)
+
 
 
 # This was the final version of the 4th plot.
