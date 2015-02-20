@@ -169,7 +169,7 @@ x
 # The data frame SO2012Ctry contains this information.
 # It can be loaded into R with
 
-load("SummerOlympics2012Ctry.rda")
+#load("SummerOlympics2012Ctry.rda")
 
 #Q6 Take a look at the variables in this data frame.
 # What kind of variable is GDP and population?
@@ -259,7 +259,7 @@ ggplot() + geom_polygon(data = mymap, aes(long, lat, group = group),colour = "gr
 # The csv file called London2012ALL_ATHLETES.csv
 # contains information about every athlete who competed in the Olympics.
 # It can be loaded into R as a data frame with the following call:
-load("~/GitHub/stat133/assignments/hw3/London2012ALL_ATHLETES.rda")
+#load("~/GitHub/stat133/assignments/hw3/London2012ALL_ATHLETES.rda")
 # There is one observation for each athlete. 
 # (Actually, about 20 athletes have two records if they
 # competed in different sporting events. Let's not worry about that.)
@@ -299,7 +299,7 @@ m
 ## You will be using apply statements in many of the upcoming assignments.
 
 # Load the rainfall data, you will get two lists, [rain] and [day]
-load("rainfallCO.rda")
+#load("rainfallCO.rda")
 
 # Create a variable 
 # max.rain : a vector of length 5 with the maximum rainfall at each station
@@ -314,7 +314,5 @@ mean.rain = sapply(rain,mean)
 sd.rain = sapply(rain,sd)
 # Create a variable 
 # n1989.rain : a vector of length 5 with the number of measurements at each station in the year 1989 (use [day])
-n1989.rain = sapply(day, length)
-
-
-
+floored = lapply(day, floor)
+n1989.rain = sapply(floored, function (x) sum(x[] == 1989))
