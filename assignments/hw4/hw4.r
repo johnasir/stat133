@@ -14,9 +14,7 @@
 #   element of <data.list>
 
 listLengths <- function(data.list) {
-
-    # your code here
-
+    return (sapply(data.list, length))
 }
 
 #### Function 2
@@ -31,6 +29,13 @@ listLengths <- function(data.list) {
 #              the column names should be : "x", "x^2", "x^3" etc.
 
 powers <- function(x, k){
+  r = matrix(x)
+  for (i in 2:k) {
+    r = cbind(r,(sapply(x, function(y) y ^ i)))
+  }
+  colnames(r) <- c("x", paste0("x^",2:k))
+  return (r)
+  
 
 }
 
@@ -63,9 +68,27 @@ powers <- function(x, k){
 # function should stop and print out an error message
 
 # Put your code here
+cool
 recipeConversion <- function(recipe){
-
+  if (colnames(recipe)[1] != "amount" || colnames(recipe)[2] != "unit" || colnames(recipe)[3] != "ingredient" ) {
+    print("ERROR: Wrong column names!")
+    return (NULL)
+  }
+  knew = data.frame(recipe)
+  knew$unit = as.character(knew$unit)
+  for (r in 1:nrow(recipe)) {
+    if (recipe[r,]$unit == "oz") {
+      knew[r,]$unit = "gr"
+      knew[r,]$amount = round(knew[r,]$amount * 28.3 / 5) * 5
+    } else if (recipe[r,]$unit == "cup" || recipe[r,]$unit == "cups") {
+      knew[r,]$unit = "ml"
+      knew[r,]$amount = round(knew[r,]$amount * 236.6 / 5) * 5
+      }
+  }
+  return (knew)
 }
+twitter = recipeConversion(cool)
+twitter
 
 
 #### Function #4a
