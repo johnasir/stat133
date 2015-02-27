@@ -68,7 +68,6 @@ powers <- function(x, k){
 # function should stop and print out an error message
 
 # Put your code here
-cool
 recipeConversion <- function(recipe){
   if (colnames(recipe)[1] != "amount" || colnames(recipe)[2] != "unit" || colnames(recipe)[3] != "ingredient" ) {
     print("ERROR: Wrong column names!")
@@ -87,8 +86,6 @@ recipeConversion <- function(recipe){
   }
   return (knew)
 }
-twitter = recipeConversion(cool)
-twitter
 
 
 #### Function #4a
@@ -113,6 +110,14 @@ twitter
 # -- The bootstrap variance is the sample variance of mu_1, mu_2, ..., mu_B
 
 bootstrapVarEst <- function(x, B){
+  mu_i =  vector() 
+  for (i in 1:B) {
+    s = sample(x, replace = TRUE)
+    mu_i = c(mu_i, mean(s)) 
+    
+  }
+  #print(mu_i)
+  return (var(mu_i)) 
 
 }
 
@@ -134,8 +139,14 @@ bootstrapVarEst <- function(x, B){
 #     for this reduced sample calculate the sample mean (get mu_1, mu_2, ..., mu_n)
 # -- The jackknife variance is the sample variance of mu_1, mu_2, ..., mu_n
 
-jackknifeVarEst <- fuction(x){
-
+jackknifeVarEst <- function (x) {
+  mu_i = vector()
+  n = length(x)
+  for (i in 1:n) {
+    s = sample(x[-i], replace = TRUE)
+    mu_i = c(mu_i, mean(s))
+  }
+  return (var(mu_i))
 }
 
 #### Function #4c
@@ -150,8 +161,12 @@ jackknifeVarEst <- fuction(x){
 
 # Note: this function calls the previous two functions.
 
-samplingVarEst <- function(  ){
-
+samplingVarEst <- function(x, type = "bootstrap", B = 1000){
+  if (type == "bootstrap") {
+    return (bootstrapVarEst(x, B))
+  } else if (type == "jackknife") {
+    return (jackknifeVarEst(x))
+  }
 }
 
 
