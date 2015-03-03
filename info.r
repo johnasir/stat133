@@ -1,0 +1,5 @@
+name = "yourName"
+SID = "yourSID"
+email = "email@berkeley.edu"
+github_name = "github_name"
+status = "enrolled/audit/concurrent"
