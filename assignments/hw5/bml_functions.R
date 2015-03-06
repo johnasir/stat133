@@ -8,9 +8,14 @@
 ## that stores the state of the system (i.e. location of red and blue cars)
 
 bml.init <- function(r, c, p){
-
+  num_cars = round(r * c * p)
+  rcars = round(num_cars/2)
+  bcars= num_cars - rcars
+  empty = (r * c) - num_cars
+  data = sample(c(rep(0,empty), rep(1, rcars), rep(2, bcars)))
+  m = matrix(data = data, nrow = r, ncol = c)
   
-   #return(m)
+   return(m)
 }
 
 #### Function to move the system one step (east and north)
