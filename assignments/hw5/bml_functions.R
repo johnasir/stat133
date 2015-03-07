@@ -25,7 +25,7 @@ bml.init <- function(r, c, p){
 
 ## NOTE : the function should move the red cars once and the blue cars once,
 ## you can write extra functions that do just a step north or just a step east.
-
+m = bml.init(4,4, .5)
 bml.step <- function(m){
 
   
