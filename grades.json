@@ -4,6 +4,20 @@
     "name": "yourName", 
     "email": "email@berkeley.edu", 
     "github_name": "github_name", 
-    "status": "enrolled", 
-    "grades": {}
+    "status": "enrolled/audit/concurrent", 
+    "grades": {
+        "hw1": {
+            "note": "", 
+            "hash": "0929237e01a2efa418ef7c61267fc772cc4c45f9", 
+            "earned": 20, 
+            "possible": 20, 
+            "penalty": 0, 
+            "parts": {
+                "hw1": {
+                    "possible": 20, 
+                    "earned": 20
+                }
+            }
+        }
+    }
 }
