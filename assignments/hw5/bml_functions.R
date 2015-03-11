@@ -63,15 +63,14 @@ bml.east <- function(r){ #moves the one's(red) right if possible ina column
 
 m = bml.init(4,4, .5)
 bml.step <- function(m){
-    old = m #store the old matrix for comparison later
-    print(old)
+    old = m 
     for (r in 1:nrow(m)) {
         m[r,] = bml.east(m[r,])
     }
     for (c in 1:ncol(m)) {
         m[,c] = bml.north(m[,c])
     }
-    print(m)
+
     return(list(m, isTRUE(all.equal(old,m))))
 }
 
@@ -80,5 +79,5 @@ bml.step <- function(m){
 ## Output : *up to you* (e.g. number of steps taken, did you hit gridlock, ...)
 
 bml.sim <- function(r, c, p){
-
+    
 }
