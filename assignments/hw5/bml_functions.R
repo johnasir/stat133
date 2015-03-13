@@ -61,7 +61,7 @@ bml.east <- function(r){ #moves the one's(red) right if possible ina column
     return (r)
 }
 
-m = bml.init(4,4, .5)
+#m = bml.init(4,4, .5)
 bml.step <- function(m){
     old = m 
     for (r in 1:nrow(m)) {
@@ -76,8 +76,23 @@ bml.step <- function(m){
 
 #### Function to do a simulation for a given set of input parameters
 ## Input : size of grid [r and c] and density [p]
-## Output : *up to you* (e.g. number of steps taken, did you hit gridlock, ...)
+## Output : *up to you* (e.g. number of steps taken, did you hit gridlock, ...) did i hit gridlock (FALSE IF I HIT GRIDLOCK)
 
 bml.sim <- function(r, c, p){
+    m = bml.init(r,c,p)
+    for (i in 1:500) {
+        x = bml.step(m)
+        if (x[[2]] == TRUE) {
+            return (FALSE)
+        } 
+    }
+    return (TRUE)
     
+    
+}
+
+for (i in 1:100) {
+    if(!bml.sim(5,4,.8)) {
+        print (i)
+    }
 }
