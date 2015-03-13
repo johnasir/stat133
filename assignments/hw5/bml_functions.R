@@ -25,17 +25,74 @@ bml.init <- function(r, c, p){
 
 ## NOTE : the function should move the red cars once and the blue cars once,
 ## you can write extra functions that do just a step north or just a step east.
-m = bml.init(4,4, .5)
-bml.step <- function(m){
+bml.north <- function(c){ #moves the two's(blue) up if possible ina column
+    copy = c
+    for (i in 1:length(copy)) {    
+        if (i == 1) {
+            if (copy[i] == 2 && copy[length(c)] == 0) {
+                c[i] <- 0 
+                c[length(c)] <- 2
+            }
+        } else {
+            if (copy[i] == 2 && copy[i-1] == 0) {
+                c[i] <- 0 
+                c[i-1] <- 2
+            }
+        }
+    }
+    return (c)
+}
 
-  
-   #return(list(m, grid.new))
+bml.east <- function(r){ #moves the one's(red) right if possible ina column
+    copy = r
+    for (i in 1:length(r)) {    
+        if (i == length(r)) {
+            if (copy[i] == 1 && copy[1] == 0) {
+                r[i] <- 0 
+                r[1] <- 1
+            }
+        } else {
+            if (copy[i] == 1 && copy[i+1] == 0) {
+                r[i] <- 0 
+                r[i+1] <- 1
+            }
+        }
+    }
+    return (r)
+}
+
+#m = bml.init(4,4, .5)
+bml.step <- function(m){
+    old = m 
+    for (r in 1:nrow(m)) {
+        m[r,] = bml.east(m[r,])
+    }
+    for (c in 1:ncol(m)) {
+        m[,c] = bml.north(m[,c])
+    }
+
+    return(list(m, isTRUE(all.equal(old,m))))
 }
 
 #### Function to do a simulation for a given set of input parameters
 ## Input : size of grid [r and c] and density [p]
-## Output : *up to you* (e.g. number of steps taken, did you hit gridlock, ...)
+## Output : *up to you* (e.g. number of steps taken, did you hit gridlock, ...) did i hit gridlock (FALSE IF I HIT GRIDLOCK)
 
 bml.sim <- function(r, c, p){
+    m = bml.init(r,c,p)
+    for (i in 1:500) {
+        x = bml.step(m)
+        if (x[[2]] == TRUE) {
+            return (FALSE)
+        } 
+    }
+    return (TRUE)
+    
+    
+}
 
+for (i in 1:100) {
+    if(!bml.sim(5,4,.8)) {
+        print (i)
+    }
 }

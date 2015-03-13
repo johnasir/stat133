@@ -20,6 +20,10 @@ z <- rep(1:5, each=4)
 ## the entries 10, 20, through 120, where the numbers are entered row by row
 ## (so the first row is [ 10 20 30 40 ]).
 m <- matrix(seq(10, 120, by=10), nrow=3, byrow=T)
+<<<<<<< HEAD
+=======
+m
+>>>>>>> ac9f9de533b74e4d15c34973720bebad6d8a3c0c
 
 
 ## Create a variable [[ n ]] that is a data frame of dimension 10 x 3
