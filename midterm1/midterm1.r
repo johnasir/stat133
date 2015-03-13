@@ -5,34 +5,34 @@
 # calculate the mean lot size (lsqft) of houses in Berkeley. Store it as the
 # variables <mean.lsqft>.
 
-# mean.lsqft <- your code here
+mean.lsqft <- mean(housing$lsqft, na.rm = TRUE)
 
 # How many unique area codes are there in the dataset?  Store them in the variable
 # <n.zipcode>
 
-# n.zipcode <- your code here
+n.zipcode <- length(unique(housing$zip))
 
 # For each house in the dataset, calculate how large the house is relative to
 # the lot size, i.e. square foot of house over square foot of lot.
 # Store it in the variable <rel.sqft>.
 
-# rel.sqft <- your code here
+rel.sqft <- (housing$bsqft)/housing$lsqft
 
 
 # Please create two new data frames with the following two subsets
 # and store them with the indicated names:
 # 1) houses whose bsqft is strictly greater than <mean.bsqft>:  <bsft.greater>
 # 2) houses whose bsqft is less than or equal to  <mean.bsqft>: <bsqft.less>
-
-# bsqft.greater <- your code here
-# bsqft.less <- your code here
+mean.bsqft = mean(housing$bsqft, na.rm = TRUE)
+bsqft.greater <- housing[housing$bsqft > mean.bsqft,]
+bsqft.less <- housing[housing$bsqft <= mean.bsqft,]
 
 
 # For each of your subsets, create a vector giving the price of each house. Name
 # these variables <rooms.greater.price> and <rooms.less.price>.
 
-# rooms.greater.price <- your code here
-# rooms.less.price <- your code here
+rooms.greater.price <- bsqft.greater$price
+rooms.less.price <- bsqft.less$price
 
 
 
@@ -49,9 +49,15 @@
 # <br> in the range (inclusive) specified by <room.range>
 
 priceByRooms <- function(room.range, br, prices) {
-
-    # your code here
-
+    totalprice = 0
+    totalobs = 0
+    for (i in 1:length(br)) {
+        if (br[i] >= room.range[1] && br[i] <= room.range[2]) {
+             totalprice = totalprice + prices[i]
+             totalobs = totalobs + 1
+        }
+    }
+    return (totalprice/totalobs)
 }
 
 
@@ -60,4 +66,8 @@ priceByRooms <- function(room.range, br, prices) {
 # 1) a title "Housing price vs Number of Rooms"
 # 2) axis labels: "Price" and "#rooms"
 # 3) plotting character set to 19
+plot(price ~ br, data=housing, xlab='#rooms', ylab='Price', main = "Housing price vs Number of Rooms", pch = 19)
+
+
+
 
