@@ -91,8 +91,3 @@ bml.sim <- function(r, c, p){
     
 }
 
-for (i in 1:100) {
-    if(!bml.sim(5,4,.8)) {
-        print (i)
-    }
-}
