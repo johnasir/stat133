@@ -80,7 +80,7 @@ bml.step <- function(m){
 
 bml.sim <- function(r, c, p){
     m = bml.init(r,c,p)
-    for (i in 1:500) {
+    for (i in 1:200) {
         x = bml.step(m)
         if (x[[2]] == TRUE) {
             return (FALSE)
