@@ -1,0 +1,5 @@
+name = "John Asirvatham"
+SID = "24161505"
+email = "jasirvatham@berkeley.edu"
+github_name = "johnasir"
+status = "enrolled"
