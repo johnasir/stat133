@@ -47,8 +47,8 @@ speeches <- readLines(con=file("stateoftheunion1790-2012.txt"))
 # Create the variable [n.speeches] a numeric variable with the number of speeches
 # Question: Does every single *** in the file indicate the beginning of a speech?
 
-breaks <- <your code here>
-n.speeches <- <your code here>
+breaks <- grep("\\*\\*\\*", speeches)
+n.speeches = length(breaks)
 
 # Hint : look at the file and/or your object speeches, where,
 # each speech has the same format, whererelative to breaks 
@@ -58,7 +58,7 @@ n.speeches <- <your code here>
 # character vector [presidents]
 # with the name of the president delivering the address
 
-presidents <- <your code here>
+presidents <- speeches[breaks + 3]
 
 # Use [speeches] and the vector [breaks] to create [tempDates], 
 # a character vector with the dates of each speech
@@ -68,10 +68,10 @@ presidents <- <your code here>
 # Note: you may need to use two lines of code to create one/both variables.
 # and apply may come in handy.
     
-tempDates <- <your code here>
-  
-speechYr <- <your code here>
-speechMo <- <your code here>
+tempDates <- speeches[breaks + 4]
+splitDates = strsplit(speeches[breaks + 4], " ")
+speechYr <- sapply(splitDates, function (x) x[3])
+speechMo <- sapply(splitDates, function (x) x[1])
 
 # Create a list variable [speechesL] which has the full text of each speech.
 # The variable [speechesL] should have one element for each speech.
@@ -206,8 +206,10 @@ no.uniqueWords <- length(uniqueWords)
 emptyVec = rep(0, length(uniqueWords))
 names(emptyVec) = uniqueWords
 
-# You may want to use an apply statment to first create a list of word vectors, one for each speech.
-# Think about what you want to do for each element, maybe put that in a little function and call in an lapply statement
+# You may want to use an apply statment to first create a list of word vectors,
+# one for each speech.
+# Think about what you want to do for each element, maybe put that in a little function and 
+# call in an lapply statement
 # wordVecs <- <your code here>
 
 # Create a matrix out of wordVecs:
