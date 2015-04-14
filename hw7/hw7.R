@@ -48,7 +48,7 @@ speeches <- readLines(con=file("stateoftheunion1790-2012.txt"))
 # Question: Does every single *** in the file indicate the beginning of a speech?
 
 breaks <- grep("\\*\\*\\*", speeches)
-n.speeches = length(breaks)
+n.speeches = length(breaks) - 1
 
 # Hint : look at the file and/or your object speeches, where,
 # each speech has the same format, whererelative to breaks 
@@ -101,7 +101,8 @@ speeches <- gsub("U.S.", "US", speeches)
 
 speechesL <- list()
 for(i in 1:n.speeches){
-  <your code here>
+  print(i)
+  speechesL[[i]] = strsplit(paste(y[(breaks[i] + 1):(breaks[i + 1] - 1)], collapse = " "), ". ", fixed = T) [[1]]
 }
 
 #### Word Vectors 
@@ -145,21 +146,26 @@ speechToWords = function(sentences) {
   # Eliminate apostrophes and numbers, 
   # and turn characters to lower case.
   # <your code here>
+  sentences = gsub('[[:punct:][:digit:]]', '', sentences)
     
   # Drop the words (Applause. and Laughter.)
   # <your code here>
+  sentences = gsub('(applause)| (laughter)', '', sentences)
 
   
   # Split the text up by blanks and punctuation  (hint: strsplit, unlist)
   # <your code here>
+  sentences = strsplit(sentences, " ")
   
   # Drop any empty words 
   # <your code here>
+  sentences = sentences[sentences != ""]
   
   # Use wordStem() to stem the words
   # check the output from wordStem(), do you get all valid words?  any empty ("") strings?
   # <your code here>
-  
+  hi = wordStem(sentences)
+  return (hi)
   # return a character vector of all words in the speech
 
 }
