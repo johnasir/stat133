@@ -101,8 +101,7 @@ speeches <- gsub("U.S.", "US", speeches)
 
 speechesL <- list()
 for(i in 1:n.speeches){
-  print(i)
-  speechesL[[i]] = strsplit(paste(y[(breaks[i] + 1):(breaks[i + 1] - 1)], collapse = " "), ". ", fixed = T) [[1]]
+  speechesL[[i]] = strsplit(paste(speeches[(breaks[i] + 5):(breaks[i + 1] - 1)], collapse = " "), ". ", fixed = T) [[1]]
 }
 
 #### Word Vectors 
@@ -146,16 +145,18 @@ speechToWords = function(sentences) {
   # Eliminate apostrophes and numbers, 
   # and turn characters to lower case.
   # <your code here>
-  sentences = gsub('[[:punct:][:digit:]]', '', sentences)
+  
+  sentences = tolower(gsub('[[:punct:][:digit:]]', ' ', sentences))
     
   # Drop the words (Applause. and Laughter.)
   # <your code here>
-  sentences = gsub('(applause)| (laughter)', '', sentences)
-
+  
+  sentences = gsub('(applause) | (laughter)', '', sentences)
   
   # Split the text up by blanks and punctuation  (hint: strsplit, unlist)
   # <your code here>
-  sentences = strsplit(sentences, " ")
+  sentences = unlist(strsplit(sentences, " "))
+  
   
   # Drop any empty words 
   # <your code here>
@@ -164,9 +165,11 @@ speechToWords = function(sentences) {
   # Use wordStem() to stem the words
   # check the output from wordStem(), do you get all valid words?  any empty ("") strings?
   # <your code here>
-  hi = wordStem(sentences)
-  return (hi)
+  sentences = wordStem(sentences)
+  sentences = sentences[sentences != ""]
+  
   # return a character vector of all words in the speech
+  return (sentences)
 
 }
 
@@ -174,13 +177,13 @@ speechToWords = function(sentences) {
 #### Apply the function speechToWords() to each speach
 # Create a list, [speechWords], where each element of the list is a vector
 # with the words from that speech.
-speechWords <- <your code here>
+speechWords <- lapply(speechesL, speechToWords)
 
 # Unlist the variable speechWords (use unlist()) to get a list of all words in all speeches,
 # then create:
 # [uniqueWords] : a vector with every word that appears in the speeches in alphabetic order
 
-uniqueWords <- <your code here>
+uniqueWords <- sort(unique(unlist(speechWords)))
 
 # I get 12965 unique words when I run my code - if you don't try to check that all preceeding
 # steps were ok.  Keep the line below in the code, if you get a different number of
@@ -216,10 +219,10 @@ names(emptyVec) = uniqueWords
 # one for each speech.
 # Think about what you want to do for each element, maybe put that in a little function and 
 # call in an lapply statement
-# wordVecs <- <your code here>
-
+wordVecs <- lapply(speechWords, table)
 # Create a matrix out of wordVecs:
-# wordMat <- <your code here>
+wordMat <- matrix(wordVec)
+
 
 # Load the dataframe [speechesDF] which has two variables,
 # president and party affiliation (make sure to keep this line in your code):
