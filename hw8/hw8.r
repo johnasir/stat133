@@ -21,7 +21,7 @@ genBootY = function(x, y, rep = TRUE) {
   ### Return a vector of random y values the same length as y
   ### You can assume that the xs are sorted
   ### Hint use tapply here!
-  hi = tapply(x, x, function (x) sample(y, replace = rep))
+  hi = tapply(x, x, function (x) sample(y, replace = TRUE))
   return(hi)
 
 }
@@ -81,13 +81,28 @@ repBoot = function(data, B = 1000){
   ### fit is for a line or a quadratic
   ### Return this list
   
-  for (i in 1:B) {
-    
-  }
+  
   
   ### Replicate a call to oneBoot B times for 
   ### each of the four conditions
-  
+  a = data.frame()
+  for (i in 1:B) {
+    a = rbind(a, oneBoot((data, fit = NULL, degree = 1)))
+    
+  }
+  b = data.frame()
+  for (i in 1:B) {
+    b = rbind(b, oneBoot((data, fit = NULL, degree = 2)))
+  }
+  c = data.frame()
+  for (i in 1:B) {
+    c = rbind(c, oneBoot((data, fit = data, degree = 1)))
+  }
+  d = data.frame()
+  for (i in 1:B) {
+    d = rbind(d, oneBoot((data, fit = data, degree = 2)))
+  }
+  coeff = list(a, b, c, d)
   
   ### Format the return value so that you have a list of
   ### length 4, one for each set of coefficients
