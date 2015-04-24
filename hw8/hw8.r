@@ -21,7 +21,8 @@ genBootY = function(x, y, rep = TRUE) {
   ### Return a vector of random y values the same length as y
   ### You can assume that the xs are sorted
   ### Hint use tapply here!
-  hi = tapply(x, x, function (x) sample(y, length(y), replace = T))  
+  hi = tapply(x, x, function (x) sample(y, replace = rep))
+  return(hi)
 
 }
 
@@ -31,8 +32,8 @@ genBootR = function(fit, err, rep = TRUE) {
   ### Add the errors to the fit to create a y vector
   ### Return a vector of y values the same length as fit
   ### HINT: It can be easier to sample the indices than the values
-  j = sample(1:length(err))
-  cheese  = sapply(1:length(fit), function (x) fit[x] + j[x])
+  err = sample(err)
+  cheese = fit + err
   return(cheese) 
  
 }
@@ -57,10 +58,10 @@ oneBoot = function(data, fit = NULL, degree = 1){
   ###  data are either your data (from call to getData)
   ###  OR fit and errors from fit of line to data
   ###  OR fit and errors from fit of quadratic to data  
-  if (data == NULL) {
-   return  (genBootY(data$x, data$y))
+  if (fit == NULL) {
+    return  (genBootY(data$x, data$y))
   } else {
-    return  (genBootR(data$x, data$y))
+    return  (genBootR(fit[[1]], fit[[2]]), degree)
   }
  
   ### Use fitModel to fit a model to this bootstrap Y 
@@ -79,6 +80,10 @@ repBoot = function(data, B = 1000){
   ### and one or two columns, depending on whether the 
   ### fit is for a line or a quadratic
   ### Return this list
+  
+  for (i in 1:B) {
+    
+  }
   
   ### Replicate a call to oneBoot B times for 
   ### each of the four conditions
@@ -111,7 +116,6 @@ bootPlot = function(x, y, coeff, trueCoeff){
   
   ### Use trueCoeff to add true line/curve - 
   ###  Make the true line/curve stand out
-
 }
 
 ### Run your simulation by calling this function
