@@ -1,0 +1,6 @@
+no output due to syntax errors  -2
+wrong understanding of fit  -2
+repBoot: fit=data?  -2
+bootPlot  -4
+
+Score: 10/20
