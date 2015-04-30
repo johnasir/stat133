@@ -93,6 +93,13 @@ hotelCal.split <- strsplit(gsub('[[:punct:]]', '', tolower(hotelCal)), " ")
 #     updated. For example updateDate(c('May, 2008', 'June, 2011'), '2008') should
 #     return 'May, 2015'.
 updateDate <- function(dates, old.yr) {
+  updated.dates = c()
+  for (i in dates) {
+    if (substring(i, nchar(i) - 3, nchar(i)) == old.yr) {
+      updated.dates = c(updated.dates, paste0(substring(i, 1, nchar(i) - 4), "2015"))
+    }
+  }
+  return (updated.dates)
 
 }
 
@@ -101,5 +108,9 @@ updateDate <- function(dates, old.yr) {
 # a vector of the same length with only the first [k] characters from the orignal vector entries.
 
 abbreviate <- function(vector, k){
-
+  lol = c()
+  for (i in vector) {
+    lol = c(lol, substring(i, 1, k))
+  }
+  return (lol)
 }
