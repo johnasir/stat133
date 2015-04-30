@@ -20,7 +20,15 @@ set.seed(123456)
 # We've set the default inputs to k=2 and B=100
 
 dice_sum <- function(k=2, B=100){
-
+  dsum = c()
+  for (b in 1:B) {
+    sum = 0
+    for(i in 1:k) {
+      sum = sum + sample(1:6, 1)
+    }
+    dsum = c(dsum, sum)
+  }
+  return (dsum)
 }
 
 #### String manipulation
@@ -29,20 +37,38 @@ phrases <- c("dog", "doggy", "den", "good boy", "Really?", "How much?", "Only $8
 
 # Create a vector [text1] that lists the elements in phrases 
 # where the SECOND TO LAST character is "o" (lower case o).
-#text1 <- <your code here>
+pretext = c()
+for (i in phrases) {
+  if (substring(i, nchar(i) - 1, nchar(i) - 1) == "o") {
+    pretext = c(pretext, i)
+  }
+    
+}
+text1 <- pretext
 
 # Create a vector [text2] that lists the elements in phrases that
 # START with the letter "d"
-#text2 <- <your code here>
+pretext1 = c()
+for (i in phrases) {
+  if (substring(i, 1, 1) == "d") {
+    pretext1 = c(pretext1, i)
+  }
+  
+}
+text2 <- pretext1
 
 # Create a variable [no.punct] that equals the number of phrases with a punctuation mark in it.
-# no.punct <- <your code here>
+no.punct <- length(grep('[:punct:]', phrases))
 
 # Create a vector [even] that is of length 1000 and has the entries
 # "even2", "even4", ...
 # with no separation between the word and the letter
-
-#even <- <your code here>
+even  = c()
+for (i in 1:1000) {
+  string = paste0("even", 2 * i)
+  even = c(even, string)
+}
+even = even
 
 
 # Start with [hotelCal] which is a character string, create 
@@ -53,8 +79,7 @@ phrases <- c("dog", "doggy", "den", "good boy", "Really?", "How much?", "Only $8
 
 hotelCal <- "On a dark desert highway, cool wind in my hair. Warm smell of colitas, rising up through the air. Up ahead in the distance, I saw a shimmering light. My head grew heavy and my sight grew dim I had to stop for the night.  There she stood in the doorway; I heard the mission bell.  And I was thinking to myself: 'This could be heaven or this could be hell'. Then she lit up a candle and she showed me the way."
 
-# hotelCal.split <- <your code here> 
-
+hotelCal.split <- strsplit(gsub('[[:punct:]]', '', tolower(hotelCal)), " ")
 
 # Write a function called updateDate. Your function should take the following
 # arguments
