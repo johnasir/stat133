@@ -1,0 +1,5 @@
+w: wrong permutation  -1
+plotting  -8
+apply  -12
+
+Score: 12/33
