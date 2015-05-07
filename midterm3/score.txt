@@ -1,0 +1,17 @@
+Total: 14/20
+
+Function 1
+5/5
+
+Function 2
+5/5
+It works but it is not very natural. See the solution for something more streamlined.
+
+Function 3
+4/5
+The idea is OK, but you need to ensure you match the word exactly for the 
+first and last words, e.g.
+gsub(“^he$”, “she”, x[1])
+	
+Function 4
+0/5
