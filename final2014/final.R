@@ -10,9 +10,9 @@
 #################################################################
 # IMPORTANT
 # Enter your personal information here, between the quotation marks:
-name <- ""
-github.name <- ""
-email.address <- ""
+name <- "john asiratha"
+github.name <- "chese"
+email.address <- "gus"
 
 #################################################################
 # The exam has a total of 100 points and for each task 
@@ -54,13 +54,13 @@ email.address <- ""
 # [1 pt]
 # Create [x], a numeric vector of length 1000 with 
 # entries: 5, 10, 15, etc.
-x <- <your code here>
+x <- seq(1000) * 5
   
 # [1 pt]
 # Create [y], a logical vector of length 1000 
 # with y[i]=T if x[i] is divisible by 10, otherwise F
 
-  y <- <your code here>
+  y <- x %% 10 == 0
   
   
 # [1 pt]
@@ -68,21 +68,21 @@ x <- <your code here>
 # that are drawn from a standard normal distribution (hint: rnorm)
 # *and* stored in increasing order
 set.seed(42)
-z <- <your code here>
+z <- sort(rnorm(111))
   
   
 # [1 pt]
 # Create [v], a numeric vector with :
 # a random permutation of the even numbers from 2 to 222
   set.seed(31415)
-v <- <your code here>
+v <- sample(seq(111) * 2)
 
   
 # [1 pt]
 # Create [w], a random permutation of the numeric values of a deck of cards
 # (i.e. just the numbers 1 through 13 each repeated 4 times)
 set.seed(2718)
-w <- <your code here>
+w <- sample(rep(seq(13),4))
 
   
 # [1 pt]
@@ -90,14 +90,14 @@ w <- <your code here>
 # Exponential random variables (hint: rexp) with rate 3
 # (arrange the values by column, as per default)
 set.seed(344)
-m <- <your code here>
+m <- matrix(rexp(100), nrow = 10)
 
   
 # [1 pt]
 # Create [l], a list with 12 elements, each a vector of length 100.
 # Each vector of length 100 of Poisson (hint:rpois) random variables with mean 5
   set.seed(71)
-<your code here>
+l = 
 
 
 # For the next few tasks you will use the data frame family (size 14x5)
