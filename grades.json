@@ -48,6 +48,36 @@
                     "earned": 7
                 }
             }
+        }, 
+        "midterm4": {
+            "note": "", 
+            "hash": "1f298fd07cee7f881753d60f722e0593719059cc", 
+            "earned": 20, 
+            "possible": 27, 
+            "penalty": 0, 
+            "parts": {
+                "midterm4": {
+                    "possible": 30, 
+                    "earned": 20
+                }
+            }
+        }, 
+        "final-feiw50hj": {
+            "note": "", 
+            "hash": "6876d1d76c0d654c16ad09a17ea9bb2a09e57ad3", 
+            "earned": 69, 
+            "possible": 100, 
+            "penalty": 0, 
+            "parts": {
+                "final": {
+                    "possible": 69, 
+                    "earned": 52
+                }, 
+                "final_fig": {
+                    "possible": 31, 
+                    "earned": 17
+                }
+            }
         }
     }
 }
